@@ -1,28 +1,35 @@
 document.addEventListener("DOMContentLoaded", function () {
-	const convertBtn = document.getElementById("convertBtn");
+	const currencyForm = document.querySelector(".currency-form");
+	const resultElement = document.getElementById("result");
 	const loader = document.getElementById("loader");
 
-	convertBtn.addEventListener("click", async function () {
-		const fromCurrency = document.getElementById("currency").value;
-		const amount = parseFloat(document.getElementById("amount").value);
+	currencyForm.addEventListener("submit", async function (event) {
+		event.preventDefault();
 
-		if (!isNaN(amount)) {
-			loader.style.display = "block"; // Wyświetl loader
+		const formData = new FormData(currencyForm);
+		const fromCurrency = formData.get("currency");
+		const amount = parseFloat(formData.get("amount"));
 
-			const result = await currencyConverter(fromCurrency, amount);
-			if (result !== null) {
-				document.getElementById(
-					"result"
-				).innerText = `${amount} ${fromCurrency} to ${result.toFixed(2)} PLN`;
-			} else {
-				document.getElementById("result").innerText =
-					"Nie udało się przeliczyć waluty.";
+		if (!isNaN(amount) && amount > 0) {
+			loader.style.display = "block";
+
+			try {
+				const result = await currencyConverter(fromCurrency, amount);
+				if (result !== null) {
+					resultElement.innerText = `${amount} ${fromCurrency} to ${result.toFixed(
+						2
+					)} PLN`;
+				} else {
+					resultElement.innerText = "Nie udało się przeliczyć waluty.";
+				}
+			} catch (error) {
+				console.error("Wystąpił błąd:", error);
+				resultElement.innerText = "Wystąpił błąd. Spróbuj ponownie później.";
 			}
 
-			loader.style.display = "none"; // Ukryj loader po zakończeniu pobierania danych
+			loader.style.display = "none";
 		} else {
-			document.getElementById("result").innerText =
-				"Proszę podać prawidłową kwotę.";
+			resultElement.innerText = "Proszę podać prawidłową kwotę.";
 		}
 	});
 });
@@ -44,6 +51,6 @@ async function currencyConverter(fromCurrency, amount) {
 		return result;
 	} catch (error) {
 		console.error("Wystąpił błąd:", error);
-		return null;
+		throw error;
 	}
 }

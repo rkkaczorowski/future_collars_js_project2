@@ -31,20 +31,20 @@ html {
 	margin: 20px 0;
 }
 
-div {
+.form-group {
 	margin-bottom: 10px;
 }
 
-label {
+.label-currency {
 	font-weight: bold;
 }
 
-input[type="number"] {
+.input-amount {
 	width: 100%;
 	padding: 5px;
 }
 
-button {
+.submit-button {
 	padding: 10px 20px;
 	background-color: #007bff;
 	color: #fff;
@@ -53,11 +53,11 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
+.submit-button:hover {
 	background-color: #0056b3;
 }
 
-#result {
+.result {
 	margin-top: 20px;
 	font-size: 18px;
 	font-weight: bold;
