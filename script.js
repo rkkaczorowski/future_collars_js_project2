@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-	const currencyForm = document.querySelector(".currency-form");
+	const currencyForm = document.getElementById("currencyForm");
 	const resultElement = document.getElementById("result");
 	const loader = document.getElementById("loader");
 

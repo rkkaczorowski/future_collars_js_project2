@@ -8,10 +8,10 @@
 		<link rel="stylesheet" href="./style.css" />
 	</head>
 	<body>
-		<div class="container">
-			<div class="logo"></div>
+		<div class="container" id="container">
+			<div class="logo" id="logo"></div>
 			<h1 class="title">Przelicznik Walut</h1>
-			<form id="currencyForm" class="currency-form">
+			<form class="currency-form" id="currencyForm">
 				<div class="form-group">
 					<label for="currency" class="label-currency">Wybierz walutę:</label>
 					<select id="currency" name="currency" class="select-currency">
@@ -31,7 +31,9 @@
 						class="input-amount"
 					/>
 				</div>
-				<button type="submit" class="submit-button">Przelicz</button>
+				<button type="submit" id="submit-button" class="submit-button">
+					Przelicz
+				</button>
 			</form>
 			<div id="result" class="result"></div>
 			<div id="loader" class="loader"></div>
